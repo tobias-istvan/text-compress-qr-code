@@ -8,11 +8,18 @@ import pako from "pako"; // For Pako
 import { deflateSync as zlibDeflate } from "react-zlib-js";
 import QRCode from "qrcode.react"; // For QR Code generation
 
+const games = ["lotto", "strike", "keno", "bullseye"];
+
 const App = () => {
   // Example test string
   const testString = `First line with max 125 characters here
-${Array.from({ length: 20 }, () =>
-  Array.from({ length: 7 }, () => Math.floor(Math.random() * 40) + 1).join(",")
+${Array.from(
+  { length: 20 },
+  () =>
+    `${games[Math.floor(Math.random() * (games.length - 1))]}:${Array.from(
+      { length: 7 },
+      () => Math.floor(Math.random() * 40) + 1
+    ).join(",")}`
 ).join("\n")}`;
 
   // fflate compression
